@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>372</width>
-    <height>372</height>
+    <width>389</width>
+    <height>361</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,9 +26,9 @@
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>140</y>
-      <width>191</width>
+      <x>7</x>
+      <y>130</y>
+      <width>211</width>
       <height>181</height>
      </rect>
     </property>
@@ -434,9 +434,9 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>191</width>
+      <x>37</x>
+      <y>10</y>
+      <width>341</width>
       <height>31</height>
      </rect>
     </property>
@@ -457,7 +457,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="textInteractionFlags">
-     <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+     <set>Qt::TextEditorInteraction</set>
     </property>
    </widget>
    <widget class="QTextEdit" name="textEdit_hex">
@@ -466,9 +466,9 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>100</y>
-      <width>191</width>
+      <x>37</x>
+      <y>90</y>
+      <width>181</width>
       <height>31</height>
      </rect>
     </property>
@@ -482,15 +482,15 @@ p, li { white-space: pre-wrap; }
      <set>Qt::ImhNone</set>
     </property>
     <property name="textInteractionFlags">
-     <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+     <set>Qt::TextEditorInteraction</set>
     </property>
    </widget>
    <widget class="QTextEdit" name="textEdit_dec">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>60</y>
-      <width>191</width>
+      <x>37</x>
+      <y>50</y>
+      <width>181</width>
       <height>31</height>
      </rect>
     </property>
@@ -504,13 +504,88 @@ p, li { white-space: pre-wrap; }
      <set>Qt::ImhDigitsOnly</set>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="logBrowser">
+   <widget class="QTextBrowser" name="textBrowser">
+    <property name="geometry">
+     <rect>
+      <x>7</x>
+      <y>10</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Consolas</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Consolas'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;b&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="textBrowser_2">
+    <property name="geometry">
+     <rect>
+      <x>7</x>
+      <y>50</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Consolas</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Consolas'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;d&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="textBrowser_3">
+    <property name="geometry">
+     <rect>
+      <x>7</x>
+      <y>90</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Consolas</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Consolas'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;h&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_log">
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>20</y>
-      <width>141</width>
-      <height>301</height>
+      <y>50</y>
+      <width>161</width>
+      <height>261</height>
      </rect>
     </property>
    </widget>
@@ -520,7 +595,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>372</width>
+     <width>389</width>
      <height>21</height>
     </rect>
    </property>
