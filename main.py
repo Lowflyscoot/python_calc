@@ -32,7 +32,9 @@ class Ui(QtWidgets.QMainWindow):
         Qt.Key_Enter:"result",
         Qt.Key_Return:"result",
         Qt.Key_Escape:"clear",
-        Qt.Key_Delete:"clear_entry"
+        Qt.Key_Delete:"clear_entry",
+        Qt.Key_Left:"lshift",
+        Qt.Key_Right:"rshift"
     }
 
     def __init__(self):
@@ -80,12 +82,15 @@ class Ui(QtWidgets.QMainWindow):
         self.current_handler = self.textEdit_dec
         # start clearing select field
         self.current_handler.setPlainText("0")
+        # connected left anr right shift
+        self.pushButton_lshift.clicked.connect(self.clk_lshift_btn)
+        self.pushButton_rshift.clicked.connect(self.clk_rshift_btn)
         # init functions dict to match with button signals
         self.functions_dict = {i: self.clk_evt_btn_create(i) for i in "0123456789ABCDEF"}
         # add entries of arifmetic operations
         self.functions_dict.update({key: self.ariphmetic_create(op) for op, key in self.operations_dict.items()})
         # add entries of other keys
-        self.functions_dict.update({"clear": self.clk_C_btn, "clear_entry":self.clk_CE_btn, "backspace":self.clk_backspace_btn})
+        self.functions_dict.update({"clear": self.clk_C_btn, "clear_entry":self.clk_CE_btn, "backspace":self.clk_backspace_btn, "rshift":self.clk_rshift_btn, "lshift":self.clk_lshift_btn})
         # stand on of active field
         self.paint_textFields()
 
@@ -96,16 +101,16 @@ class Ui(QtWidgets.QMainWindow):
                 btn.clicked.connect(func)
         self.setChildrenFocusPolicy(Qt.NoFocus)
 
-    # ???
     def setChildrenFocusPolicy(self, policy):
+        """???"""
         def recursiveSetChildFocusPolicy(parentQWidget):
             for childQWidget in parentQWidget.findChildren(QtWidgets.QWidget):
                 childQWidget.setFocusPolicy(policy)
                 recursiveSetChildFocusPolicy(childQWidget)
         recursiveSetChildFocusPolicy(self)
 
-    # def to performing the function of tracking keyboard
     def keyPressEvent(self, event):
+        """performing the function of tracking keyboard"""
         offset = 0
         key = self.keys_dict.get(event.key())
         if key is not None:
@@ -121,16 +126,16 @@ class Ui(QtWidgets.QMainWindow):
             self.current_handler = self.inputs_list[index]
             self.paint_textFields()
 
-    # def to stad out current field of non-current
     def paint_textFields(self):
+        """stad out current field of non-current"""
         for edit, label in self.labels_dict.items():
             if edit == self.current_handler:
                 label.setPalette(self.palActive)
             else:
                 label.setPalette(self.palInactive)
 
-    # def to creating
     def clk_evt_btn_create(self, num):
+        """creating"""
         def clk_evt_btn():
             if self.new_write_flag == True:
                 self.new_write_flag = False
@@ -142,14 +147,14 @@ class Ui(QtWidgets.QMainWindow):
             self.current_handler.setPlainText(text)
         return clk_evt_btn
 
-    # def to creating functions from arifmetic buttons
     def ariphmetic_create(self, operator):
+        """creating functions from arifmetic buttons"""
         def ar_handler():
             self.aripfmetic_operations(operator)
         return ar_handler
 
-    # replace separators in string, convert non-decimal value to decimal and return int
     def recieve_value(self, input):
+        """replace separators in string, convert non-decimal value to decimal and return int"""
         input = input.replace(' ', '')
         try:
             if self.current_handler == self.textEdit_bin:
@@ -163,64 +168,64 @@ class Ui(QtWidgets.QMainWindow):
             itext = 0
             return 0
 
-    # def to connect all signals of text entries
     def all_num_signals_connect(self):
+        """connect all signals of text entries"""
         self.textEdit_dec.textChanged.connect(self.output_update)
         self.textEdit_bin.textChanged.connect(self.output_update)
         self.textEdit_hex.textChanged.connect(self.output_update)
 
-    # def to disconnect all signals of text entries
     def all_num_signals_disconnect(self):
+        """disconnect all signals of text entries"""
         self.textEdit_dec.textChanged.disconnect(self.output_update)
         self.textEdit_bin.textChanged.disconnect(self.output_update)
         self.textEdit_hex.textChanged.disconnect(self.output_update)
 
-    # def to get current number in text-editor and add input num from buttons to the end
     def output_update(self):
+        """get current number in text-editor and add input num from buttons to the end"""
         text = self.current_handler.toPlainText()
         itext = self.recieve_value(text)
         self.select_notation_and_set(itext)
 
-    # def to set values to not-current editors
     def select_notation_and_set(self, itext):
+        """set values to not-current editors"""
         self.all_num_signals_disconnect()
         if self.current_handler != self.textEdit_dec: self.set_dec(itext)
         if self.current_handler != self.textEdit_bin: self.set_bin(itext)
         if self.current_handler != self.textEdit_hex: self.set_hex(itext)
         self.all_num_signals_connect()
 
-    # def to set values to current editor
     def set_current_notation(self, itext):
+        """set values to current editor"""
         self.all_num_signals_disconnect()
         if self.current_handler == self.textEdit_dec: self.set_dec(itext)
         if self.current_handler == self.textEdit_bin: self.set_bin(itext)
         if self.current_handler == self.textEdit_hex: self.set_hex(itext)
         self.all_num_signals_connect()
 
-    # def to set valuet to all editors
     def set_all_notation(self, itext):
+        """set valuet to all editors"""
         self.all_num_signals_disconnect()
         self.set_dec(itext)
         self.set_bin(itext)
         self.set_hex(itext)
         self.all_num_signals_connect()
 
-    # def to output decimal-formating text
     def set_dec(self, itext):
+        """output decimal-formating text"""
         self.textEdit_dec.setPlainText(f"{itext}")
 
-    # def to output binary-formating text
     def set_bin(self, itext):
+        """output binary-formating text"""
         sout = f"{itext:032b}"
-        self.textEdit_bin.setPlainText(f"{sout[:8]} {sout[8:16]} {sout[16:24]} {sout[24:32]}")
+        self.textEdit_bin.setPlainText(f"{sout[0:8]} {sout[8:16]} {sout[16:24]} {sout[24:32]}")
 
-    # def to output hexadecimal-formating text
     def set_hex(self, itext):
+        """output hexadecimal-formating text"""
         sout = f"{itext:08X}"
         self.textEdit_hex.setPlainText(f"{sout[:2]} {sout[2:4]} {sout[4:6]} {sout[6:]}")
 
-    # def to connection with signal clicked of buttons sum, sub, mul, dev, result
     def aripfmetic_operations(self, operation):
+        """connection with signal clicked of buttons sum, sub, mul, dev, result"""
         # get text by active input entry and convert to int
         text = self.current_handler.toPlainText()
         itext = self.recieve_value(text)
@@ -241,36 +246,47 @@ class Ui(QtWidgets.QMainWindow):
         self.new_write_flag = True
         self.textEdit_log.setPlainText(self.text_log)
 
-    # def to connection with signal selectChange of decimal entry
     def select_inp_bin(self):
+        """connection with signal selectChange of decimal entry"""
         self.current_handler = self.textEdit_bin
-    # def to connection with signal selectChange of binary entry
     def select_inp_dec(self):
+        """connection with signal selectChange of binary entry"""
         self.current_handler = self.textEdit_dec
-    # def to connection with signal selectChange of hex entry
     def select_inp_hex(self):
+        """connection with signal selectChange of hex entry"""
         self.current_handler = self.textEdit_hex
 
-    # def to connection with signal of C-button
     def clk_C_btn(self):
+        """connection with signal of C-button"""
         self.arifmetic_result = None
         self.current_ariphmetic_operation = None
         self.text_log = ""
         self.textEdit_log.setPlainText(self.text_log)
         self.clk_CE_btn()
 
-    # def to connection with signal of CE-button
     def clk_CE_btn(self):
+        """connection with signal of CE-button"""
         self.new_write_flag = True
         self.set_all_notation(0)
 
-    # def to connection with signal of backspace-button
     def clk_backspace_btn(self):
+        """connection with signal of backspace-button"""
         text = self.current_handler.toPlainText()
         text = text[:-1]
         itext = self.recieve_value(text)
         self.set_all_notation(itext)
 
+    def clk_lshift_btn(self):
+        itext = int(self.current_handler.toPlainText())
+        itext <<= 1
+        itext &= 0xFFFFFFFF
+        self.set_all_notation(itext)
+
+    def clk_rshift_btn(self):
+        itext = int(self.current_handler.toPlainText())
+        itext >>= 1
+        itext &= 0xFFFFFFFF
+        self.set_all_notation(itext)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
