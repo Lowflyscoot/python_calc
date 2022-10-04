@@ -163,13 +163,13 @@ class Ui(QtWidgets.QMainWindow):
             itext = 0
             return 0
 
-    # def to connect all signals of text entryes
+    # def to connect all signals of text entries
     def all_num_signals_connect(self):
         self.textEdit_dec.textChanged.connect(self.output_update)
         self.textEdit_bin.textChanged.connect(self.output_update)
         self.textEdit_hex.textChanged.connect(self.output_update)
 
-    # def to disconnect all signals of text entryes
+    # def to disconnect all signals of text entries
     def all_num_signals_disconnect(self):
         self.textEdit_dec.textChanged.disconnect(self.output_update)
         self.textEdit_bin.textChanged.disconnect(self.output_update)
@@ -237,8 +237,8 @@ class Ui(QtWidgets.QMainWindow):
         if self.current_ariphmetic_operation is None:
             self.text_log += str(self.arifmetic_result) + "\n"
             self.arifmetic_result = None
-        else:
-            self.new_write_flag = True
+
+        self.new_write_flag = True
         self.textEdit_log.setPlainText(self.text_log)
 
     # def to connection with signal selectChange of decimal entry
