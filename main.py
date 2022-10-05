@@ -139,12 +139,11 @@ class Ui(QtWidgets.QMainWindow):
         def clk_evt_btn():
             if self.new_write_flag == True:
                 self.new_write_flag = False
-                self.set_all_notation(0)
-                text = str(num)
+                itext = self.recieve_value(str(num))
             else:
                 text = self.current_handler.toPlainText()
-                text += str(num)
-            self.current_handler.setPlainText(text)
+                itext = self.recieve_value(text + str(num))
+            self.set_all_notation(itext)
         return clk_evt_btn
 
     def ariphmetic_create(self, operator):
@@ -241,6 +240,7 @@ class Ui(QtWidgets.QMainWindow):
 
         if self.current_ariphmetic_operation is None:
             self.text_log += str(self.arifmetic_result) + "\n"
+            self.set_all_notation(self.arifmetic_result)
             self.arifmetic_result = None
 
         self.new_write_flag = True
