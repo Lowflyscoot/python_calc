@@ -100,7 +100,7 @@ class Ui(QtWidgets.QMainWindow):
         self.setChildrenFocusPolicy(Qt.NoFocus)
 
     def setChildrenFocusPolicy(self, policy):
-        """???"""
+        """disconnect all changes of focus"""
         def recursiveSetChildFocusPolicy(parentQWidget):
             for childQWidget in parentQWidget.findChildren(QtWidgets.QWidget):
                 childQWidget.setFocusPolicy(policy)
@@ -173,11 +173,9 @@ class Ui(QtWidgets.QMainWindow):
 
     def output_to_all_fields(self, int_number):
         """set valuet to all editors"""
-        # self.all_num_signals_disconnect()
         self.print_decimal(int_number)
         self.print_binary(int_number)
         self.print_hexadecimal(int_number)
-        # self.all_num_signals_connect()
 
     def print_decimal(self, itext):
         """output decimal-formating text"""
